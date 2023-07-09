@@ -1,0 +1,12 @@
+-nastavení projektu
+1) pip install virtualenv , nainstaluje virtualni prostredi
+2) python -m venv venv , v mém workspace vytvořím složku s virtuálním prostředím
+3) . venv\scripts\activate , aktivuji virtuální prostředí pro muj projekt
+-spider
+4) pip install scrap
+5) pip install selenium
+6) pip install webdriver_manager
+-databáze
+7) pip install psycopg2
+-server
+8) pip install flask

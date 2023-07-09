@@ -1,0 +1,12 @@
+FROM python:3.11.4
+
+WORKDIR /app
+
+COPY requirements.server.txt .
+RUN pip install -r requirements.server.txt
+
+COPY server.py .
+COPY templates/ ./templates/
+COPY config.py .
+
+CMD ["python", "./server.py"]

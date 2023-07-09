@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+     <!-- <meta http-equiv="refresh" content="10">  Stránka se obnoví každých 30 sekund  -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraped Items</title>
+</head>
+<body>
+    <h1>Scraped Items</h1>
+    <ul>
+        {% for title, image_url in items %}
+        <li>
+            <h2>{{ title }}</h2>
+            <img src="{{ image_url }}" alt="{{ title }}">
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

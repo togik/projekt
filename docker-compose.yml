@@ -1,0 +1,87 @@
+# version: '3'
+# services:
+#   db:
+#     image: postgres:13
+#     volumes:
+#       - db_data:/var/lib/postgresql/data
+#     environment:
+#       POSTGRES_USER: postgres
+#       POSTGRES_PASSWORD: 122333
+#       POSTGRES_DB: newdb
+
+#   db_creation:
+#     build: 
+#       context: .
+#       dockerfile: Dockerfile.datab
+#     depends_on:
+#       - db
+
+#   spider:
+#     build: 
+#       context: .
+#       dockerfile: Dockerfile.spider
+#     depends_on: 
+#       - db
+#       - db_creation
+
+#   server:
+#     build: 
+#       context: .
+#       dockerfile: Dockerfile.server
+#     ports:
+#       - "8080:8080"
+#     depends_on: 
+#       - db
+#       - spider
+#       - db_creation
+
+# volumes:
+#   db_data:
+
+
+version: '3'
+services:
+  db:
+    image: postgres:13
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 122333
+      POSTGRES_DB: newdb
+
+  db_creation:
+    build: 
+      context: .
+      dockerfile: Dockerfile.datab
+    volumes:
+      - shared_volume:/data
+    depends_on:
+      - db
+
+  spider:
+    build: 
+      context: .
+      dockerfile: Dockerfile.spider
+    volumes:
+      - shared_volume:/data
+    depends_on: 
+      - db
+      - db_creation
+
+  server:
+    build: 
+      context: .
+      dockerfile: Dockerfile.server
+    ports:
+      - "8080:8080"
+    volumes:
+      - shared_volume:/data
+    depends_on: 
+      - db
+      - spider
+      - db_creation
+
+volumes:
+  db_data:
+  shared_volume:
